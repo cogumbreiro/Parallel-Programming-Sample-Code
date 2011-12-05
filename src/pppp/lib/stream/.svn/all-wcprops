@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svnroot/x10/!svn/ver/23258/courses/trunk/pppp11/src/pppp/lib/stream
+END
+FilteredStream.x10
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/x10/!svn/ver/23251/courses/trunk/pppp11/src/pppp/lib/stream/FilteredStream.x10
+END
+OpStream.x10
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svnroot/x10/!svn/ver/23251/courses/trunk/pppp11/src/pppp/lib/stream/OpStream.x10
+END
+XDucer.x10
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svnroot/x10/!svn/ver/23251/courses/trunk/pppp11/src/pppp/lib/stream/XDucer.x10
+END
+Stream.x10
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svnroot/x10/!svn/ver/23251/courses/trunk/pppp11/src/pppp/lib/stream/Stream.x10
+END
+FBy.x10
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svnroot/x10/!svn/ver/23251/courses/trunk/pppp11/src/pppp/lib/stream/FBy.x10
+END
+FByPush.x10
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svnroot/x10/!svn/ver/23251/courses/trunk/pppp11/src/pppp/lib/stream/FByPush.x10
+END
+Source.x10
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svnroot/x10/!svn/ver/23251/courses/trunk/pppp11/src/pppp/lib/stream/Source.x10
+END
+BoundedStreamImp.x10
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svnroot/x10/!svn/ver/23251/courses/trunk/pppp11/src/pppp/lib/stream/BoundedStreamImp.x10
+END
+Spring.x10
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svnroot/x10/!svn/ver/23251/courses/trunk/pppp11/src/pppp/lib/stream/Spring.x10
+END
+StreamClosedException.x10
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/x10/!svn/ver/23251/courses/trunk/pppp11/src/pppp/lib/stream/StreamClosedException.x10
+END
+ConstantStream.x10
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/x10/!svn/ver/23251/courses/trunk/pppp11/src/pppp/lib/stream/ConstantStream.x10
+END
