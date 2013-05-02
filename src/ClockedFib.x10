@@ -24,12 +24,12 @@ public class ClockedFib {
                 }
                 y() = (Long.MAX_VALUE);
                 Console.OUT.println();
-            }
+            }/*
             x.drop();
             y.drop();
             f.advance(); // wait for the other two tasks
             Console.OUT.println(x.clock.phase());
-            Console.OUT.println(y.clock.phase());
+            Console.OUT.println(y.clock.phase());*/
         }
     }
 }
