@@ -3,9 +3,9 @@ public class ClockedFib {
         val N:Long = s.size > 0 as Long ? Long.parse(s(0)) : 1000 as Long;
         Console.OUT.println("Started!");
         finish async {
-            val x = new Clocked[Long](1);
-            val y = new Clocked[Long](1);
-            val f = Clock.make();
+            val x = new Clocked[Long](1, Clock.make("x"));
+            val y = new Clocked[Long](1, Clock.make("y"));
+            val f = Clock.make("f");
             async clocked(x.clock, y.clock, f) {
                 while (y() < N) {
                     x() = x() + y();
@@ -20,16 +20,16 @@ public class ClockedFib {
                     Console.OUT.print(" " +  x());
                     y.next();
                     x.next();
-                    
+                    // f.advance(); introduce a deadlock
                 }
                 y() = (Long.MAX_VALUE);
                 Console.OUT.println();
-            }/*
-            x.drop();
-            y.drop();
-            f.advance(); // wait for the other two tasks
-            Console.OUT.println(x.clock.phase());
-            Console.OUT.println(y.clock.phase());*/
+            }
+            x.clock.drop();
+            y.clock.drop();
+            f.advance(); // wait for the other two tasks to finish
+            //Console.OUT.println(x.clock.phase());
+            //Console.OUT.println(y.clock.phase());
         }
     }
 }
