@@ -1,6 +1,6 @@
 public class Fib {
     def this() {}
-	
+	// iterative fibonacci
     def fibo(n:Int):Int = {
         var x:Int=0, y:Int=1;
         for (var i:Int=2; i <= n; i++) {
@@ -11,8 +11,6 @@ public class Fib {
         return y;
     }
     def fib(n:Int):Int = n < 2 ? n : fib(n-1)+fib(n-2);
-	
-    def fact(n:long):long = n < 2L ? 1L : n*fact(n-1);
 	
     def afib(n:Int):Int {
     	if (n < 2)
