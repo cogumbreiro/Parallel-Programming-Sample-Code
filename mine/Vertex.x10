@@ -1,9 +1,9 @@
-import x10.util.concurrent.AtomicBoolean;
+import x10.util.concurrent.AtomicInteger;
 import x10.util.Random;
 import x10.util.HashSet;
 
 class Vertex(id:Int) {
-    val visited = new AtomicBoolean(false);
+    val visited = new AtomicInteger(-1);
 	var edges:Array[Vertex]=null;
 	var out:Int=-1;
     def this(id:Int) {
@@ -13,8 +13,20 @@ class Vertex(id:Int) {
     	edges=e;
     }
     
+    def visit(depth:Int) {
+        return visited.compareAndSet(-1, depth);
+    }
+    
     def visit() {
-        return visited.compareAndSet(false, true);
+        return visit(0);
+    }
+    
+    def isVisited() {
+        return visited.get() != -1;
+    }
+    
+    def getDepth() {
+        return visited.get();
     }
     
     def edgeString() {
