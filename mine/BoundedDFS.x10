@@ -3,38 +3,57 @@ import x10.util.HashSet;
 import x10.util.HashMap;
 
 public class BoundedDFS {
-    val doneStates = new HashMap[Vertex,Int]();
-    val depth = new HashMap[Vertex,Int]();
-
-    def mustExplore(vertex:Vertex) {
-        val doneState = doneStates(vertex);
-        if (doneState != null && doneState() <= depth(vertex).value) {
-            return false;
+    static struct VertexDepth(vertex:Vertex, depth:Int) {
+        def this(vertex:Vertex, depth:Int) {
+            assert depth >= 0;
+            property(vertex, depth);
         }
-        return true;
+        def mustExplore() {
+            val firstDepth = vertex.getDepth();
+            return firstDepth == -1 || firstDepth > depth;
+        }
+        def siblings() {
+            val newDepth = depth + 1;
+            val result = new Array[VertexDepth](
+                vertex.edges.size,
+                (x:Int) => VertexDepth(vertex.edges(x), newDepth)
+            );
+            return result.values();
+        }
+        def visit() {
+            return vertex.visit(depth);
+        }
+        public def hashCode() {return vertex.hashCode();}
+        public def equals(obj:Any) {return vertex.equals(obj);}
     }
     
-    def boundedDFS(vertex:Vertex, depthBound:Int, outFrontier:HashSet[Vertex]) {
-        if (mustExplore(vertex)) {
-            Console.OUT.println("Visiting: " + vertex);
-            val vertexDepth = depth(vertex).value;
-            if (vertexDepth < depthBound) {
-                doneStates.put(vertex, vertexDepth);
-                outFrontier.remove(vertex);
-                for (sibling in vertex.edges.values()) {
-                    depth.put(sibling, vertexDepth + 1);
+    def boundedDFS(vdepth:VertexDepth, depthBound:Int, outFrontier:HashSet[VertexDepth]) {
+        if (vdepth.mustExplore()) {
+            Console.OUT.println("Visiting: " + vdepth);
+            if (vdepth.depth < depthBound) {
+                vdepth.visit();
+                outFrontier.remove(vdepth);
+                for (sibling in vdepth.siblings()) {
                     boundedDFS(sibling, depthBound, outFrontier);
                 }
             } else {
-                outFrontier.add(vertex);
+                outFrontier.add(vdepth);
             }
         }
     }
     
-    def iterBoundedDFS(initial:Vertex, depthCutoff:Int, inc:Int) {
-        depth.put(initial, 0);
-        var frontier:HashSet[Vertex] = new HashSet[Vertex]();
-        frontier.add(initial);
+    def boundedDFSFromFrontier(frontier:HashSet[VertexDepth], currentBound:Int) {
+        val outFrontier = new HashSet[VertexDepth]();
+        for (v in frontier) {
+            boundedDFS(v, currentBound, outFrontier);
+        }
+        return outFrontier;
+    }
+    
+    def run(initial:Vertex, depthCutoff:Int, inc:Int) {
+        val vdepth = new VertexDepth(initial, 0);
+        var frontier:HashSet[VertexDepth] = new HashSet[VertexDepth]();
+        frontier.add(vdepth);
         var currentBound:Int = inc;
         while (currentBound <= depthCutoff) {
             val newFrontier = boundedDFSFromFrontier(frontier, currentBound);
@@ -47,16 +66,8 @@ public class BoundedDFS {
         return false;
     }
     
-    def boundedDFSFromFrontier(frontier:HashSet[Vertex], currentBound:Int) {
-        val outFrontier = new HashSet[Vertex]();
-        for (v in frontier) {
-            boundedDFS(v, currentBound, outFrontier);
-        }
-        return outFrontier;
-    }
-    
     def run(vertex:Vertex) {
-        iterBoundedDFS(vertex, 10, 2);
+        run(vertex, 10, 2);
     }
     
 	public static def main(args:Array[String](1)) {

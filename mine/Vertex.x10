@@ -5,7 +5,6 @@ import x10.util.HashSet;
 class Vertex(id:Int) {
     val visited = new AtomicInteger(-1);
 	var edges:Array[Vertex]=null;
-	var out:Int=-1;
     def this(id:Int) {
     	property(id);
     }
@@ -37,7 +36,7 @@ class Vertex(id:Int) {
     	return r;
     }
     public def toString() = 
-    	"" + id + " (" + edgeString() + ") > " + out;
+    	"Vertex(id=" + id + ", depth=" + visited + ", edges=[" + edgeString() + "])";
     
     public static def makeGraph(size:Int) {
 		val vertices = new Array[Vertex](size, (i:Int)=> new Vertex(i));
